@@ -1,0 +1,41 @@
+1. POST /transactions
+
+Sample Input:
+{
+“amount”:”100.25”
+“timestamp”:"2021-07-17T09:59:51.312Z"
+}
+
+amount – transaction amount;
+timestamp – transaction time in the ISO 8601 format YYYY-MM-DDThh:mm:ss.sssZ in the UTC timezone (this is not the current timestamp)
+
+Response:
+201 – in case of success
+204 – if the transaction is older than 60 seconds
+400 – if the JSON is invalid
+422 – if any of the fields are not parsable or the transaction date is in the future
+
+2. GET /statistics
+
+Sample Response:
+{
+“sum”:””,
+“avg”:””,
+“max”:””,
+“min”:””,
+“count”:””
+}
+
+sum –  total sum of transaction value in the last 60 seconds
+avg – average amount of transaction value in the last 60 seconds
+max –single highest transaction value in the last 60 seconds
+min – single lowest transaction value in the last 60 seconds
+count –  total number of transactions that happened in the last 60 seconds
+
+3. DELETE /transactions
+
+1. This endpoint causes all existing transactions to be deleted
+2. The endpoint should accept an empty request body and return a 204 status code.
+
+
+GET /statistics has to run in O(1) without any database and code has to be submitted with unit tests.
